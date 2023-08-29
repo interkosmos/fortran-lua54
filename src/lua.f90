@@ -1,6 +1,6 @@
 ! lua.f90
 !
-! A collection of ISO C binding interfaces to Lua 5.3 for Fortran 2008.
+! A collection of ISO C binding interfaces to Lua 5.4 for Fortran 2008.
 !
 ! Author:  Philipp Engel
 ! Licence: ISC
@@ -158,7 +158,7 @@ module lua
         end function c_strlen
     end interface
 
-    ! Interfaces to Lua 5.3.
+    ! Interfaces to Lua 5.4.
     interface
         ! int lua_checkstack(lua_State *L, int n)
         function lua_checkstack(l, n) bind(c, name='lua_checkstack')
