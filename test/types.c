@@ -3,7 +3,7 @@
  *
  * To compile, run:
  *
- * $ cc `pkg-config --cflags lua-5.3` -o types types.c `pkg-config --libs lua-5.3`
+ * $ cc `pkg-config --cflags lua-5.4` -o types types.c `pkg-config --libs lua-5.4`
  */
 #include <stdio.h>
 #include <luaconf.h>
