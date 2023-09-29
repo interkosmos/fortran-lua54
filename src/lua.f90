@@ -140,6 +140,7 @@ module lua
     public :: lua_version
     public :: lual_checkversion_
     public :: lual_dofile
+    public :: lual_dostring
     public :: lual_len
     public :: lual_loadfile
     public :: lual_loadfilex
@@ -846,6 +847,17 @@ contains
         lual_dofile = lual_loadfile(l, fn)
         if (lual_dofile == 0) lual_dofile = lua_pcall(l, 0, LUA_MULTRET, 0)
     end function lual_dofile
+
+    ! int luaL_dostring(lua_State *L, const char *str)
+    function lual_dostring(l, str)
+        !! Macro replacement that calls `lual_loadstring()` and `lua_pcall()`.
+        type(c_ptr),      intent(in) :: l
+        character(len=*), intent(in) :: str
+        integer                      :: lual_dostring
+
+        lual_dostring = lual_loadstring(l, str)
+        if (lual_dostring == 0) lual_dostring = lua_pcall(l, 0, LUA_MULTRET, 0)
+    end function lual_dostring
 
     ! int luaL_loadfile(lua_State *L, const char *filename)
     function lual_loadfile(l, fn)

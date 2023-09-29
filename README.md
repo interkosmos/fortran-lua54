@@ -160,7 +160,7 @@ You may have to alter `lua_integer`, `lua_number`, and `lua_kcontext` in
 | `luaL_checkudata`       |                         |       |         |
 | `luaL_checkversion`     |                         |       |         |
 | `luaL_dofile`           | `lual_dofile`           |   ✓   |         |
-| `luaL_dostring`         |                         |       |         |
+| `luaL_dostring`         | `lual_dostring`         |   ✓   |         |
 | `luaL_error`            |                         |       |         |
 | `luaL_execresult`       |                         |       |         |
 | `luaL_fileresult`       |                         |       |         |
