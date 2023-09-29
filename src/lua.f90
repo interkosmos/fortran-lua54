@@ -66,13 +66,14 @@ module lua
     integer(kind=c_int), parameter, public :: LUA_GCGEN        = 10
     integer(kind=c_int), parameter, public :: LUA_GCINC        = 11
 
-    ! Thread status.
+    ! Error codes.
     integer(kind=c_int), parameter, public :: LUA_OK        = 0
     integer(kind=c_int), parameter, public :: LUA_YIELD     = 1
     integer(kind=c_int), parameter, public :: LUA_ERRRUN    = 2
     integer(kind=c_int), parameter, public :: LUA_ERRSYNTAX = 3
     integer(kind=c_int), parameter, public :: LUA_ERRMEM    = 4
     integer(kind=c_int), parameter, public :: LUA_ERRERR    = 5
+    integer(kind=c_int), parameter, public :: LUA_ERRFILE   = LUA_ERRERR + 1
 
     public :: lua_arith
     public :: lua_call
