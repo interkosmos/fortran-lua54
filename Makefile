@@ -1,11 +1,15 @@
 .POSIX:
+.SUFFIXES:
 
 CC      = gcc
 FC      = gfortran
 AR      = ar
-DEBUG   = #-g -O0 -Wall -fmax-errors=1
-CFLAGS  = $(DEBUG) `pkg-config --cflags lua-5.4`
-FFLAGS  = $(DEBUG) -std=f2008 `pkg-config --cflags lua-5.4`
+
+DEBUG   = -g -O0 -Wall -fmax-errors=1
+RELEASE = -O2 -march=native
+
+CFLAGS  = $(RELEASE) `pkg-config --cflags lua-5.4`
+FFLAGS  = $(RELEASE) `pkg-config --cflags lua-5.4`
 ARFLAGS = rcs
 LDFLAGS = `pkg-config --libs-only-L lua-5.4`
 LDLIBS  = `pkg-config --libs-only-l lua-5.4`
