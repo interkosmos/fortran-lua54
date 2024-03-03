@@ -1,9 +1,9 @@
 .POSIX:
 .SUFFIXES:
 
-CC      = gcc
-FC      = gfortran
-AR      = ar
+CC = gcc
+FC = gfortran
+AR = ar
 
 DEBUG   = -g -O0 -Wall -fmax-errors=1
 RELEASE = -O2 -march=native
@@ -13,9 +13,12 @@ FFLAGS  = $(RELEASE) `pkg-config --cflags lua-5.4`
 ARFLAGS = rcs
 LDFLAGS = `pkg-config --libs-only-L lua-5.4`
 LDLIBS  = `pkg-config --libs-only-l lua-5.4`
+INCDIR  = $(PREFIX)/include/libfortran-lua54
+LIBDIR  = $(PREFIX)/lib
+MODULE  = lua.mod
 TARGET  = libfortran-lua54.a
 
-.PHONY: all clean examples test
+.PHONY: all clean examples install test
 
 all: $(TARGET)
 
@@ -41,6 +44,14 @@ string: $(TARGET) examples/string/string.f90
 
 table: $(TARGET) examples/table/table.f90
 	$(FC) $(FFLAGS) $(LDFLAGS) -o table examples/table/table.f90 $(TARGET) $(LDLIBS)
+
+install: $(TARGET)
+	@echo "--- Installing $(TARGET) to $(LIBDIR)/ ..."
+	install -d $(LIBDIR)
+	install -m 644 $(TARGET) $(LIBDIR)/
+	@echo "--- Installing module files to $(INCDIR)/ ..."
+	install -d $(INCDIR)
+	install -m 644 $(MODULE) $(INCDIR)/
 
 clean:
 	if [ `ls -1 *.mod 2>/dev/null | wc -l` -gt 0 ]; then rm *.mod; fi

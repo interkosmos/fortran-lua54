@@ -11,7 +11,7 @@ Similar projects:
 * [f2k3-lua](https://github.com/MaikBeckmann/f2k3-lua): Lua bindings for loading configuration files only (MIT).
 * [luaf](https://bitbucket.org/vadimz/luaf/): Selected bindings to Lua 5.1 (MIT).
 
-## Build
+## Build Instructions
 
 Install Lua 5.4 with development headers. On FreeBSD, run:
 
@@ -32,16 +32,17 @@ $ xmake
 ```
 
 This outputs `libfortran-lua54.a` and `lua.mod` to `build/`. Without xmake, just
-compile the library using the provided `Makefile`:
+compile and install the library using the provided `Makefile`:
 
 ```
 $ make
+$ make install PREFIX=/opt
 ```
 
 Or, run the Fortran Package Manager:
 
 ```
-$ fpm build --profile=release
+$ fpm build --profile release
 ```
 
 Link your Fortran applications against `libfortran-lua54.a`, and `liblua-5.4.a`
@@ -66,9 +67,10 @@ application.
 ```fortran
 ! example.f90
 program main
-    use, intrinsic :: iso_c_binding, only: c_ptr
+    use, intrinsic :: iso_c_binding
     use :: lua
     implicit none
+
     type(c_ptr) :: l
     integer     :: rc
 
@@ -83,11 +85,12 @@ program main
 end program main
 ```
 
-Compile, (dynamically) link, and run the example with:
+If the the interface bindings are installed to `/opt`, then compile,
+link, and run the example with:
 
 ```
-$ gfortran -I/usr/local/include/lua54/ -L/usr/local/lib/lua/5.4/ \
-  -o example example.f90 libfortran-lua54.a -llua-5.4
+$ gfortran -I/opt/include/libfortran-lua54/ -L/usr/local/lib/lua/5.4/ \
+  -o example example.f90 /opt/lib/libfortran-lua54.a -llua-5.4
 $ ./example
 Hello from Lua!
 ```
@@ -109,9 +112,9 @@ Additional examples can be found in `examples/`.
 * **string:** runs Lua code stored in a Fortran string.
 * **table:** reads values from a Lua table.
 
-## fpm
+## Fortran Package Manager
 
-You can add *fortran-lua54* as an [fpm](https://github.com/fortran-lang/fpm)
+You can add *fortran-lua54* as an [FPM](https://github.com/fortran-lang/fpm)
 dependency:
 
 ```toml

@@ -13,12 +13,13 @@ module fortran
 contains
     function luaopen_fortran(l) bind(c)
         !! Utility function to register the Fortran routine `hello()`.
+        !!
+        !! The function postfix (`fortran`) must match the name of the shared
+        !! library (`fortran.so`).
         type(c_ptr), intent(in), value :: l
         integer(kind=c_int)            :: luaopen_fortran
 
-        call lua_register(l, &
-                          'hello', &        ! Name of the Fortran routine.
-                          c_funloc(hello))  ! Function pointer to the Fortran routine.
+        call lua_register(l, 'hello', c_funloc(hello))
         luaopen_fortran = 1
     end function luaopen_fortran
 
