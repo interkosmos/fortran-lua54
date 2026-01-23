@@ -165,7 +165,7 @@ You may have to alter `lua_integer`, `lua_number`, and `lua_kcontext` in
 | `luaL_checkstring`      |                         |       |         |
 | `luaL_checktype`        | `lual_checktype`        |   ✓   |         |
 | `luaL_checkudata`       |                         |       |         |
-| `luaL_checkversion`     | `lual_checkversion`     |   ✓   |         |
+| `luaL_checkversion`     | `lual_checkversion`     |   ✓   |    ✓    |
 | `luaL_dofile`           | `lual_dofile`           |   ✓   |         |
 | `luaL_dostring`         | `lual_dostring`         |   ✓   |         |
 | `luaL_error`            |                         |       |         |
